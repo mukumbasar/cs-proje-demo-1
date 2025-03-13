@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSProjeDemo1.Entities.Enums
 {
-    public enum Statue
+    public enum Status
     {
         Available = 0,
         Unavailable,

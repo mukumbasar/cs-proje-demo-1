@@ -9,6 +9,6 @@ namespace CSProjeDemo1.Entities.Abstracts
         public string Author { get; set; }
         public string ISBN { get; set; }
         public DateTime PublicationDate { get; set; }
-        public Statue Statue { get; set; }
+        public Status Status { get; set; }
     }
 }

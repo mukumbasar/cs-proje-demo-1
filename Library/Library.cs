@@ -33,26 +33,37 @@ namespace CSProjeDemo1.Library
 
         }
 
-        // TODO: Implement List Members, List Available Books, List Unavailable Books, List BorrowedBooks of a member
+        public IEnumerable<IMember> ListMembers()
+        {
+            return Members.AsEnumerable();
+        }
+
+        public IEnumerable<Book> ListAvailableBooks()
+        {
+            return Books.Where(b => b.Status == Status.Available);
+        }
+
+        public IEnumerable<Book> ListUnavailableBooks()
+        {
+            return Books.Where(b => b.Status == Status.Unavailable);
+        }
+
+        public IEnumerable<Book> ListBooksBorrowedByMember(Guid memberId)
+        {
+            return Members.FirstOrDefault(m => m.Id == memberId)?.BorrowedBooks ?? Enumerable.Empty<Book>();
+        }
 
         public void BorrowBook(Guid memberId, Book book)
         {
-            var memberToBorrow = Members.FirstOrDefault(m => m.Id == memberId);
-            if (memberToBorrow != null)
-            {
-                memberToBorrow.BorrowedBooks.Add(book);
-            }
+            var member = Members.FirstOrDefault(m => m.Id == memberId);
+            member?.BorrowedBooks.Add(book);
         }
 
         public void ReturnBook(Guid memberId, Book book)
         {
-            var memberToReturn = Members.FirstOrDefault(m => m.Id == memberId);
-            if (memberToReturn != null)
-            {
-                memberToReturn.BorrowedBooks.Remove(book);
-            }
+            var member = Members.FirstOrDefault(m => m.Id == memberId);
+            member?.BorrowedBooks.Remove(book); 
         }
-
 
         public void AddBook(string title, string author, string isbn, DateTime publicationDate, BookType bookType)
         {
