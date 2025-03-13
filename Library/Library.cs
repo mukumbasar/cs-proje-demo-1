@@ -9,15 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSProjeDemo1.Entities.Concretes.Library
+namespace CSProjeDemo1.Library
 {
     public class Library
-    {   
+    {
         public List<IMember> Members { get; set; }
         public List<Book> Books { get; set; }
 
-        public Library() 
-        { 
+        public Library()
+        {
             Books = new List<Book>
             {
                 new BookHistory("History of Cars", "Mehmet Celik", new DateTime(2011, 3, 3), "9780062316097"),
@@ -91,8 +91,8 @@ namespace CSProjeDemo1.Entities.Concretes.Library
         public void RemoveMember(string phoneNumber)
         {
             var memberToBeRemoved = Members.FirstOrDefault(m => m.PhoneNumber == phoneNumber);
-            if (memberToBeRemoved != null) 
-            { 
+            if (memberToBeRemoved != null)
+            {
                 Members.Remove(memberToBeRemoved);
             }
         }
