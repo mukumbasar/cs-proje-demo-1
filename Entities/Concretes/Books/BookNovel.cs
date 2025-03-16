@@ -17,7 +17,7 @@ namespace CSProjeDemo1.Entities.Concretes.Books
             Author = author;
             PublicationDate = publicationDate;
             ISBN = isbn;
-            Statue = Status.Available;
+            Status = Status.Available;
         }
     }
 }

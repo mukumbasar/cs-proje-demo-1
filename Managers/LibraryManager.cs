@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace CSProjeDemo1.Library
 {
-    public class Library
+    public class LibraryManager
     {
         public List<IMember> Members { get; set; }
         public List<Book> Books { get; set; }
 
-        public Library()
+        public LibraryManager()
         {
             Books = new List<Book>
             {
@@ -56,13 +56,21 @@ namespace CSProjeDemo1.Library
         public void BorrowBook(Guid memberId, Book book)
         {
             var member = Members.FirstOrDefault(m => m.Id == memberId);
-            member?.BorrowedBooks.Add(book);
+            if (member != null && book.Status == Status.Available)
+            {
+                member.BorrowedBooks.Add(book);
+                book.Status = Status.Unavailable;
+            }
         }
 
         public void ReturnBook(Guid memberId, Book book)
         {
             var member = Members.FirstOrDefault(m => m.Id == memberId);
-            member?.BorrowedBooks.Remove(book); 
+            if (member != null && member.BorrowedBooks.Contains(book))
+            {
+                member.BorrowedBooks.Remove(book);
+                book.Status = Status.Available;
+            }
         }
 
         public void AddBook(string title, string author, string isbn, DateTime publicationDate, BookType bookType)
